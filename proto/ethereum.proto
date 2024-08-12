@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "./proto";
+
+service EthereumService {
+  rpc GetAccount(AccountRequest) returns (AccountResponse);
+  rpc GetAccounts(stream AccountsRequest) returns (stream AccountsResponse);
+}
+
+message AccountRequest {
+  string ethereum_address = 1;
+  string crypto_signature = 2;
+}
+
+message AccountResponse {
+  string gastoken_balance = 1;
+  string wallet_nonce = 2;
+}
+
+message AccountsRequest {
+  repeated string ethereum_addresses = 1;
+  string erc20_token_address = 2;
+}
+
+message AccountsResponse {
+  string ethereum_address = 1;
+  uint64 erc20_balance = 2;
+}
